@@ -18,12 +18,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-[#F9FAFB] text-gray-900 pb-24 selection:bg-blue-100`}>
-        <Header />
-        <main className="max-w-md mx-auto px-6">
+      {/* h-[100dvh] locks it exactly to the phone screen height. overflow-hidden prevents the whole page from moving. */}
+      <body className={`${inter.className} bg-[#F9FAFB] text-gray-900 h-[100dvh] flex flex-col overflow-hidden selection:bg-blue-100`}>
+        
+        {/* The Header is frozen at the top */}
+        <div className="z-50 flex-shrink-0">
+          <Header />
+        </div>
+
+        {/* This is the ONLY part that scrolls */}
+        <main className="flex-1 overflow-y-auto w-full max-w-md mx-auto px-6 pb-28 pt-4 relative scroll-smooth">
           {children}
         </main>
-        <BottomNav />
+
+        {/* The Bottom Nav is frozen at the bottom */}
+        <div className="z-50">
+          <BottomNav />
+        </div>
+
       </body>
     </html>
   );
